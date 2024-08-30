@@ -11,7 +11,7 @@ RUN sudo wget -qO- https://raw.githubusercontent.com/luxonis/depthai-ros/main/in
 ENV WS=/ws
 RUN mkdir -p $WS/src
 RUN git clone https://github.com/grusel-opi/depthai-ros.git
-COPY ./depthai-ros .$WS/src/
+COPY depthai-ros .$WS/src/
 RUN cd .$WS/ && rosdep install --from-paths src --ignore-src  -y
 
 RUN cd .$WS/ && . /opt/ros/humble/setup.sh && ./src/depthai-ros/build.sh -s 1 -r 1 -m 1 
@@ -19,7 +19,7 @@ RUN cd .$WS/ && . /opt/ros/humble/setup.sh && ./src/depthai-ros/build.sh -s 1 -r
 RUN echo "if [ -f ${WS}/install/setup.bash ]; then source ${WS}/install/setup.bash; fi" >> $HOME/.bashrc
 
 RUN git clone https://github.com/grusel-opi/turtlebot4_ws.git -b oakd
-COPY ./turtlebot4_ws .$WS/src/
+COPY turtlebot4_ws .$WS/src/
 RUN cd .$WS/ && . /opt/ros/humble/setup.sh && colcon build --symlink-install
 
 COPY ./run_oakd.sh ./

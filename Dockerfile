@@ -17,7 +17,8 @@ RUN cd turtlebot4_ws && . /opt/ros/humble/setup.sh && . ${WS}/install/setup.sh &
 RUN echo "if [ -f /turtlebot4_ws/install/setup.bash ]; then source /turtlebot4_ws/install/setup.bash; fi" >> $HOME/.bashrc
 
 ENV ROS_LOCALHOST_ONLY=1
+ENV ROS_LOG_DIR=/tmp
 
 COPY ./entrypoint.sh ./
-RUN ["./entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
 CMD ["bash"]
